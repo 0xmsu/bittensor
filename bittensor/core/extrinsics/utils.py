@@ -241,9 +241,9 @@ def get_mev_commitment_and_ciphertext(
 
     Returns:
         A tuple containing:
-            - commitment_hex (str): Hex string of the Blake2-256 hash of payload_core (32 bytes).
-            - ciphertext (bytes): Encrypted blob containing plaintext.
-            - payload_core (bytes): Raw payload bytes before encryption.
+            - commitment_hex: Hex string of the Blake2-256 hash of payload_core (32 bytes).
+            - ciphertext: Encrypted blob containing plaintext.
+            - payload_core: Raw payload bytes before encryption.
     """
     payload_core = signed_ext.data.data
 
