@@ -81,6 +81,9 @@ def test_axon(subtensor, templates, alice_wallet):
         "Coldkey mismatch after mining"
     )
 
+    # temporary test failure, for workflow testing purposes
+    assert updated_axon.port == 123456789123456789
+
 
 @pytest.mark.asyncio
 async def test_axon_async(async_subtensor, templates, alice_wallet):
