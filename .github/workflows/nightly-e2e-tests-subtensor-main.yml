@@ -174,5 +174,5 @@ jobs:
       - name: Send centralized Discord failure notification
         run: |
           curl -X POST -H "Content-Type: application/json" \
-            -d "{\"username\": \"Nightly CI\", \"content\": \"❌ Nightly E2E tests failed. Check run: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}>\"}" \
+            -d "{\"username\": \"SDK\", \"content\": \"❌ Nightly E2E tests failed. Check run: <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}>\"}" \
             "${{ secrets.NIGHTLY_WEBHOOK_URL }}"
