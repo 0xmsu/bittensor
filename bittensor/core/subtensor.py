@@ -5847,7 +5847,7 @@ class Subtensor(SubtensorMixin):
                 have successfully decrypted and executed the inner call. If True, the function will poll subsequent
                 blocks for the event matching this submission's commitment.
             blocks_for_revealed_execution: Maximum number of blocks to poll for the executed event after inclusion. The
-                function checks blocks from start_block+1 to start_block + blocks_for_revealed_execution. Returns
+                function checks blocks from start_block to start_block + blocks_for_revealed_execution. Returns
                 immediately if the event is found before the block limit is reached.
 
         Returns:
