@@ -260,7 +260,7 @@ class TestSubnet:
         self._check_netuid()
         current_block = self.s.block
         activation_block = self.s.queries.query_constant(
-            "SubtensorModule", "DurationOfStartCall"
+            "SubtensorModule", "InitialStartCallDelay"
         ).value
         # added 10 blocks bc 2.5 seconds is not always enough for the chain to update.
         self.s.wait_for_block(current_block + activation_block + 1)
@@ -294,7 +294,7 @@ class TestSubnet:
         current_block = await self.s.block
         activation_block = (
             await self.s.queries.query_constant(
-                "SubtensorModule", "DurationOfStartCall"
+                "SubtensorModule", "InitialStartCallDelay"
             )
         ).value
         # added 10 blocks bc 2.5 seconds is not always enough for the chain to update.
