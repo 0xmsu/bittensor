@@ -4321,7 +4321,7 @@ class AsyncSubtensor(SubtensorMixin):
             reuse_block: Whether to reuse the last-used block hash.
 
         Return:
-            Amound of blocks after the start call can be executed.
+            Amount of blocks after the start call can be executed.
         """
         return cast(
             int,
