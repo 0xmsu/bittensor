@@ -3548,7 +3548,7 @@ class Subtensor(SubtensorMixin):
             block: The blockchain block number for the query.
 
         Return:
-            Amound of blocks after the start call can be executed.
+            Amount of blocks after the start call can be executed.
         """
         return cast(
             int,
