@@ -4996,7 +4996,7 @@ class AsyncSubtensor(SubtensorMixin):
 
         """
         return (
-            await self.query_constant("SubtensorModule", "DurationOfStartCall")
+            await self.query_constant("SubtensorModule", "InitialStartCallDelay")
         ) == 10
 
     async def is_hotkey_delegate(
