@@ -1,6 +1,3 @@
-import asyncio
-import time
-
 import pytest
 
 from tests.e2e_tests.utils import (
