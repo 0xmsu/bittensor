@@ -6441,13 +6441,27 @@ def test_mev_submit_encrypted_default_params(subtensor, fake_wallet, mocker):
 )
 def test_is_fast_blocks(subtensor, mocker, fast_or_not, expected_result):
     """Verifies that `is_fast_blocks` calls proper method with proper parameters."""
-    mocked_query_constant = mocker.patch.object(
-        subtensor, "query_constant", return_value=fast_or_not
+    # Preps
+    mocked_get_start_call_delay = mocker.patch.object(
+        subtensor, "get_start_call_delay", return_value=fast_or_not
     )
 
+    # Call
     result = subtensor.is_fast_blocks()
 
-    mocked_query_constant.assert_called_once_with(
-        "SubtensorModule", "InitialStartCallDelay"
-    )
+    # Asserts
+    mocked_get_start_call_delay.assert_called_once()
     assert result == expected_result
+
+
+def test_get_start_call_delay(subtensor, mocker):
+    """Verifies that `get_start_call_delay` calls proper method with proper parameters."""
+    # Preps
+    mocked_query_subtensor = mocker.patch.object(subtensor, "query_subtensor")
+
+    # Call
+    result = subtensor.get_start_call_delay()
+
+    # Asserts
+    mocked_query_subtensor.assert_called_once_with(name="StartCallDelay", block=None)
+    assert result == mocked_query_subtensor.return_value
