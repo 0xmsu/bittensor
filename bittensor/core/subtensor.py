@@ -3071,7 +3071,6 @@ class Subtensor(SubtensorMixin):
 
         Returns:
             A tuple of reveal block and commitment message.
-            
         Notes:
             - <https://docs.learnbittensor.org/glossary#commit-reveal>
         """
