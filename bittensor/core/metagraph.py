@@ -1423,7 +1423,7 @@ class AsyncMetagraph(NumpyOrTorch):
             from bittensor.core.async_subtensor import AsyncSubtensor
 
             subtensor = AsyncSubtensor(network=self.chain_endpoint)
-            await self.subtensor.initialize()
+            await subtensor.initialize()
             self.subtensor = subtensor
         return subtensor
 
