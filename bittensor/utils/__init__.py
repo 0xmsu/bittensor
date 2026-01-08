@@ -176,8 +176,8 @@ def get_explorer_url_for_network(
 
     explorer_urls: dict[str, str] = {}
 
-    explorer_root_urls: dict[str, str] = (
-        _get_explorer_root_url_by_network_from_map(network, network_map)
+    explorer_root_urls: dict[str, str] = _get_explorer_root_url_by_network_from_map(
+        network, network_map
     )
 
     if explorer_root_urls != {}:
