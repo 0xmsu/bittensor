@@ -6315,3 +6315,45 @@ async def test_mev_submit_encrypted_default_params(subtensor, fake_wallet, mocke
         blocks_for_revealed_execution=3,
     )
     assert result == mocked_submit_encrypted_extrinsic.return_value
+
+
+@pytest.mark.parametrize(
+    "fast_or_not, expected_result",
+    [
+        (10, True),
+        (5, False),
+    ],
+)
+@pytest.mark.asyncio
+async def test_is_fast_blocks(subtensor, mocker, fast_or_not, expected_result):
+    """Verifies that `is_fast_blocks` calls proper method with proper parameters."""
+    # Preps
+    mocked_get_start_call_delay = mocker.patch.object(
+        subtensor, "get_start_call_delay", return_value=fast_or_not
+    )
+
+    # Call
+    result = await subtensor.is_fast_blocks()
+
+    # Asserts
+    mocked_get_start_call_delay.assert_awaited_once()
+    assert result == expected_result
+
+
+@pytest.mark.asyncio
+async def test_get_start_call_delay(subtensor, mocker):
+    """Verifies that `get_start_call_delay` calls proper method with proper parameters."""
+    # Preps
+    mocked_query_subtensor = mocker.patch.object(subtensor, "query_subtensor")
+
+    # Call
+    result = await subtensor.get_start_call_delay()
+
+    # Asserts
+    mocked_query_subtensor.assert_awaited_once_with(
+        name="StartCallDelay",
+        block=None,
+        block_hash=None,
+        reuse_block=False,
+    )
+    assert result == mocked_query_subtensor.return_value

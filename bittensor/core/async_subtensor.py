@@ -4306,6 +4306,35 @@ class AsyncSubtensor(SubtensorMixin):
         )
         return [u16_normalized_float(w) for w in result]
 
+    async def get_start_call_delay(
+        self,
+        block: Optional[int] = None,
+        block_hash: Optional[str] = None,
+        reuse_block: bool = False,
+    ) -> int:
+        """
+        Retrieves the start call delay in blocks.
+
+        Parameters:
+            block: The blockchain block number for the query.
+            block_hash: The blockchain block_hash of the block id.
+            reuse_block: Whether to reuse the last-used block hash.
+
+        Return:
+            Amount of blocks after the start call can be executed.
+        """
+        return cast(
+            int,
+            (
+                await self.query_subtensor(
+                    name="StartCallDelay",
+                    block=block,
+                    block_hash=block_hash,
+                    reuse_block=reuse_block,
+                )
+            ),
+        )
+
     async def get_subnet_burn_cost(
         self,
         block: Optional[int] = None,
@@ -4985,19 +5014,17 @@ class AsyncSubtensor(SubtensorMixin):
     async def is_fast_blocks(self) -> bool:
         """Checks if the node is running with fast blocks enabled.
 
-        Fast blocks have a block time of 10 seconds, compared to the standard 12-second block time. This affects
+        Fast blocks have a block time of 0.25 seconds, compared to the standard 12-second block time. This affects
         transaction timing and network synchronization.
 
         Returns:
-            `True` if fast blocks are enabled (10-second block time), `False` otherwise (12-second block time).
+            `True` if fast blocks are enabled, `False` otherwise.
 
         Notes:
             - <https://docs.learnbittensor.org/resources/glossary#fast-blocks>
 
         """
-        return (
-            await self.query_constant("SubtensorModule", "DurationOfStartCall")
-        ) == 10
+        return await self.get_start_call_delay() == 10
 
     async def is_hotkey_delegate(
         self,
