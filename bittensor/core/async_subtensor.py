@@ -8,6 +8,7 @@ import asyncstdlib as a
 import scalecodec
 from async_substrate_interface import AsyncSubstrateInterface
 from async_substrate_interface.substrate_addons import RetryAsyncSubstrate
+from async_substrate_interface.types import ScaleObj
 from async_substrate_interface.utils.storage import StorageKey
 from bittensor_drand import get_encrypted_commitment
 from bittensor_wallet.utils import SS58_FORMAT
@@ -165,7 +166,6 @@ from bittensor.utils.liquidity import (
 
 if TYPE_CHECKING:
     from async_substrate_interface import AsyncQueryMapResult
-    from async_substrate_interface.types import ScaleObj
     from bittensor_wallet import Keypair, Wallet
 
     from bittensor.core.axon import Axon
@@ -5024,9 +5024,10 @@ class AsyncSubtensor(SubtensorMixin):
             - <https://docs.learnbittensor.org/resources/glossary#fast-blocks>
 
         """
-        return (
-            cast(bool, (await self.query_constant("Aura", "SlotDuration")).value) == 250
+        slot_duration_obj = cast(
+            ScaleObj, await self.query_constant("Aura", "SlotDuration")
         )
+        return slot_duration_obj.value == 250
 
     async def is_hotkey_delegate(
         self,
