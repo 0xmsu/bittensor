@@ -6435,22 +6435,23 @@ def test_mev_submit_encrypted_default_params(subtensor, fake_wallet, mocker):
 @pytest.mark.parametrize(
     "fast_or_not, expected_result",
     [
-        (10, True),
-        (5, False),
+        (250, True),
+        (12000, False),
     ],
 )
 def test_is_fast_blocks(subtensor, mocker, fast_or_not, expected_result):
     """Verifies that `is_fast_blocks` calls proper method with proper parameters."""
     # Preps
-    mocked_get_start_call_delay = mocker.patch.object(
-        subtensor, "get_start_call_delay", return_value=fast_or_not
+    return_obj = mocker.Mock(value=fast_or_not)
+    mocked_query_constant = mocker.patch.object(
+        subtensor, "query_constant", return_value=return_obj
     )
 
     # Call
     result = subtensor.is_fast_blocks()
 
     # Asserts
-    mocked_get_start_call_delay.assert_called_once()
+    mocked_query_constant.assert_called_once()
     assert result == expected_result
 
 
