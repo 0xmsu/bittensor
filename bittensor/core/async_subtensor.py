@@ -5024,7 +5024,9 @@ class AsyncSubtensor(SubtensorMixin):
             - <https://docs.learnbittensor.org/resources/glossary#fast-blocks>
 
         """
-        return await self.get_start_call_delay() == 10
+        return (
+            cast(bool, (await self.query_constant("Aura", "SlotDuration")).value) == 250
+        )
 
     async def is_hotkey_delegate(
         self,

@@ -4103,7 +4103,7 @@ class Subtensor(SubtensorMixin):
             - <https://docs.learnbittensor.org/resources/glossary#fast-blocks>
 
         """
-        return self.get_start_call_delay() == 10
+        return cast(bool, self.query_constant("Aura", "SlotDuration").value) == 250
 
     def is_hotkey_delegate(self, hotkey_ss58: str, block: Optional[int] = None) -> bool:
         """
