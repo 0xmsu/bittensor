@@ -160,3 +160,13 @@ $ ag "query_subtensor"
 ```
 
 Remember, debugging involves a lot of trial and error. Don't be discouraged if things don't work right away. Keep trying different things, and don't hesitate to ask for help if you need it.
+
+## Problem With Block 5611654
+
+If you are having problems decoding the extrinsics or events on block 5611654 of finney, it is due to a your Python 
+interpreter's default recursion limit. Simply change your system recursion limit:
+
+```python
+import sys
+sys.setrecursionlimit(100_000)
+```
