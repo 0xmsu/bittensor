@@ -10,6 +10,7 @@
 * chore: remove unused test helper by @Olexandr88 in https://github.com/opentensor/bittensor/pull/3241
 * Add `start_call_delay_hyperparameter` support by @basfroman in https://github.com/opentensor/bittensor/pull/3234
 * Improve `is_fast_blocks` by @basfroman in https://github.com/opentensor/bittensor/pull/3243
+* Adds note about block 5611654 decoding by @thewhaleking in https://github.com/opentensor/bittensor/pull/3246
 
 ## New Contributors
 * @Dairus01 made their first contribution in https://github.com/opentensor/bittensor/pull/3231
